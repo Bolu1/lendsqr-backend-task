@@ -66,14 +66,4 @@ app.use('*', (req, res, next) => next(new NotFoundError()));
 app.use(ErrorHandler);
 
 
-
-
-const PORT = process.env.PORT|| 8000
-
-app.listen(PORT, ()=>{
-    
-    console.log(colors.random(`Application Listening at http://localhost:${PORT}`))
-})
-
-
 module.exports = app

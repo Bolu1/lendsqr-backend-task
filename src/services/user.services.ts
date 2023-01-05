@@ -135,6 +135,26 @@ class UserService {
       return user[0];
     }); 
   }
+
+
+  public static async getUserByAccountNumber(accountNumber: number) {
+    return knex("users")
+      .select({
+        id: "id",
+        slug: "slug",
+        account_number: "account_number",
+        password: "password",
+        balance: "balance",
+        firstname: "firstname",
+        lastname: "lastname",
+        phone: "phone",
+        email: "email",
+      })
+      .where({ account_number: accountNumber })
+      .then((user) => {
+        return user[0];
+      });
+  }
 }
 
 export default UserService;

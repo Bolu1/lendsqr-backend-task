@@ -59,7 +59,7 @@ exports.withdraw = asyncHandler(async (req: Request, res: Response) => {
 
   // check user's balance and compute new balance
   const currentBalance = await UserService.getAccountBalance(res.locals.user);
-  if(currentBalance.balance > currentBalance){
+  if(currentBalance.balance < req.body.amount){
 
     throw new BadRequestError("Insufficient funds")
   };
@@ -89,9 +89,15 @@ exports.transfer = asyncHandler(async (req: Request, res: Response) => {
     throw new BadRequestError("The maximum transfer is 100000 naira");
   }
 
+  const userBalance = await UserService.getAccountBalance(res.locals.user);
+  if(userBalance){
+    throw new BadRequestError("Recipient does not exist");
+  }
+
+
   const currentBalance = await UserService.getAccountBalance(res.locals.user);
   if(currentBalance.balance < req.body.amount){
-    throw new BadRequestError("Insufficent funds");
+    throw new BadRequestError("Insufficient funds");
 
   }
 
