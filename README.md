@@ -56,7 +56,13 @@ The database consists of the users and transaction tables. The users table consi
 
 `id`, `slug`, `email`, `account_number`, `firstname`, `phone`, `lastname`, `password`, `balance`, `created_at` and `updaed_at`.
 
+I chose to not create a wallet table to keep it simple,but this db implemntation can also work a wallet table.
+
 While the tansaction table consists of the following columns:
 
 `id`, `slug`, `creditor`, `debtor`, `amount`, `reference`, `type`, `status`, `created_at` and `updated_at`
+
+Here's and ER diagram for the db structure
+
+![Screenshot from 2023-01-06 16-09-44](https://user-images.githubusercontent.com/68053657/211042863-cb5f0234-79fa-4ecb-88c6-57a13c355458.png)
 
