@@ -45,6 +45,7 @@ describe("POST /api/user/signin", () => {
           email: "tests@gmail.com",
           password: "123456",
         })
+
         expect(response.statusCode).toBe(200);
       }, 100000);
     });
