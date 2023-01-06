@@ -4,7 +4,7 @@ const app = require("../src/app");
 jest.useRealTimers();
 
 // get auth token
-var token: string;
+var token;
 beforeAll(async () => {
   const response = await request(app).post("/api/user/signin").send({
     email: "test@gmail.com",
