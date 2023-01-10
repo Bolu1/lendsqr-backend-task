@@ -6,7 +6,7 @@ import activityLogger from "../helpers/logger";
 import { generateString } from "../helpers/constants";
 const fs = require("fs");
 const knex = require("../config/connect");
-// import {SignUp, SignIn} from "../interfaces/t.interface"
+import {TransactionHistory} from "../interfaces/transaction.interface"
 import {
   BadRequestError,
   ConflictError,
@@ -49,6 +49,21 @@ class TransactionService {
         amount: amount,
         type: type,
         status: 1
+      })    .then((id) => {
+        //get transaction by id
+        return knex('transactions')
+            .select({
+              type: "type",
+              reference: "reference",
+              slug: "slug",
+              creditor: "creditor",
+              debtor: "debtor",
+        })
+            .where({id})
+            .then((user: [TransactionHistory]) => {
+            console.log(user[0]);
+            return user[0]
+        })
       })
   }
 
@@ -63,7 +78,7 @@ class TransactionService {
     })
     .where({ creditor: user.accountNumber })
     .orWhere({ debtor: user.accountNumber })
-    .then((user) => {
+    .then((user: [TransactionHistory]) => {
       return user;
     }); 
   }

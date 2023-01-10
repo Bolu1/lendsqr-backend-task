@@ -11,7 +11,7 @@ beforeAll(async () => {
     password: "123456",
   }, 100000);
   token = response.body.data.token;
-});
+}); 
 
 describe("POST /api/transaction/deposit", () => {
   describe("Deposit", () => {

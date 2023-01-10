@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import asyncHandler from "../middleware/async";
 import UserService from "../services/user.services";
 const { validateParameters } = require("../utils/validateParameters");
-import {SignUp, SignIn} from "../interfaces/user.interface"
+import {SignUp, SignIn, SignInResponse} from "../interfaces/user.interface"
 import {
   BadRequestDataResponse,
   CreatedResponse,
@@ -37,7 +37,7 @@ exports.addUser = asyncHandler(
 exports.signin = asyncHandler(
   async (req: Request, res: Response) => {
 
-    const response = await UserService.signin(req.body);
+    const response:SignInResponse = await UserService.signin(req.body);
     return new SuccessResponse("Success", response).send(res);
   }
 )

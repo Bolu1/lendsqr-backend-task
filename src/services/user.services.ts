@@ -5,7 +5,7 @@ const multer = require("multer");
 import { generateString } from "../helpers/constants";
 const fs = require("fs");
 const knex = require("../config/connect");
-import { SignUp, SignIn } from "../interfaces/user.interface";
+import { SignUp, SignIn, SignInResponse, UserInformation } from "../interfaces/user.interface";
 import {
   BadRequestError,
   ConflictError,
@@ -65,7 +65,7 @@ class UserService {
       accountNumber: user.account_number,
     });
 
-    const payload = {
+    const payload:SignInResponse = {
       id: user.slug,
       firstName: user.firstname,
       lastName: user.lastname,
@@ -90,7 +90,7 @@ class UserService {
         email: "email",
       })
       .where({ phone: phone })
-      .then((user) => {
+      .then((user: [UserInformation]) => {
         return user[0];
       });
   }
@@ -109,7 +109,7 @@ class UserService {
         email: "email",
       })
       .where({ email: email })
-      .then((user) => {
+      .then((user: [UserInformation]) => {
         return user[0];
       });
   }
@@ -120,7 +120,7 @@ class UserService {
       balance: "balance"
     })
     .where({ slug: user.id })
-    .then((user) => {
+    .then((user: [UserInformation]) => {
       return user[0];
     }); 
   }
@@ -151,7 +151,7 @@ class UserService {
         email: "email",
       })
       .where({ account_number: accountNumber })
-      .then((user) => {
+      .then((user: [UserInformation]) => {
         return user[0];
       });
   }
